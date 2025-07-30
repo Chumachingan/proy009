@@ -32,11 +32,7 @@ public class ArbolController {
 
     @PostMapping
     public Arbol crearArbol(@RequestBody Arbol arbol) {
-        // Las ramas deben tener el arbol asignado
-        if (arbol.getRamas() != null) {
-            arbol.getRamas().forEach(r -> r.setArbol(arbol));
-        }
-        return arbolRepository.save(arbol);
+        return arbolService.crear(arbol);
     }
 
     @PutMapping("/{id}")
@@ -46,6 +42,7 @@ public class ArbolController {
 
     @DeleteMapping("/{id}")
     public void borrarArbol(@PathVariable Long id) {
-        arbolRepository.deleteById(id);
+        arbolService.borrar(id);
     }
 }
+ 

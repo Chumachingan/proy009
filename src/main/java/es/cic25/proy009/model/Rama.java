@@ -7,17 +7,24 @@ import jakarta.persistence.*;
 public class Rama {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; // Identificador único de la rama
 
-    private String nombre;
-    private double longitud;
-    private String color;
-    private boolean principal;
+    @Version
+    private Long version; // Control de versiones para concurrencia optimista
+
+    @Column(name = "nombre")
+    private String nombre; // Nombre de la rama
+    @Column(name = "longitud")
+    private double longitud; // Longitud de la rama
+    @Column(name = "color")
+    private String color; // Color de la rama
+    @Column(name = "principal")
+    private boolean principal; // Indica si es la rama principal
 
     @ManyToOne
     @JoinColumn(name = "arbol_id", nullable = false)
     @JsonBackReference
-    private Arbol arbol;
+    private Arbol arbol; // Árbol al que pertenece la rama
 
     // getters y setters
     public Long getId() {

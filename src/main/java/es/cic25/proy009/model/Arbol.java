@@ -9,12 +9,22 @@ import java.util.List;
 public class Arbol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; // Identificador único del árbol
 
-    private String nombre;
-    private String tipo;
-    private int edad;
-    private String ubicacion;
+    @Version
+    private Long version; // Control de versiones para concurrencia optimista
+
+    @Column(name = "nombre")
+    private String nombre; // Nombre del árbol
+
+    @Column(name = "tipo")
+    private String tipo; // Tipo de árbol (ej: Frutal, Deciduo)
+
+    @Column(name = "edad")
+    private int edad; // Edad del árbol
+
+    @Column(name = "ubicacion")
+    private String ubicacion; // Ubicación del árbol
 
     @OneToMany(
         mappedBy = "arbol",
@@ -22,7 +32,7 @@ public class Arbol {
         orphanRemoval = true
     )
     @JsonManagedReference
-    private List<Rama> ramas = new ArrayList<>();
+    private List<Rama> ramas = new ArrayList<>(); // Lista de ramas asociadas al árbol
 
     public Arbol() {
     }

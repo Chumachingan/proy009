@@ -1,5 +1,6 @@
 package es.cic25.proy009.uc;
 
+// Test unitario para la clase ArbolUc, usando mocks para ArbolService
 import es.cic25.proy009.model.Arbol;
 import es.cic25.proy009.service.ArbolService;
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,7 @@ import static org.mockito.Mockito.*;
 class ArbolUcTest {
     @Test
     void crearArbolDelegadoEnService() {
+        // Verifica que crearArbol delega correctamente en el servicio
         ArbolService service = mock(ArbolService.class);
         ArbolUc uc = new ArbolUc(service);
 
@@ -25,6 +27,7 @@ class ArbolUcTest {
 
     @Test
     void obtenerTodosDelegadoEnService() {
+        // Verifica que obtenerTodos delega correctamente en el servicio
         ArbolService service = mock(ArbolService.class);
         ArbolUc uc = new ArbolUc(service);
 
@@ -35,6 +38,7 @@ class ArbolUcTest {
 
     @Test
     void obtenerPorIdDelegadoEnService() {
+        // Verifica que obtenerPorId delega correctamente en el servicio
         ArbolService service = mock(ArbolService.class);
         ArbolUc uc = new ArbolUc(service);
 
@@ -48,6 +52,7 @@ class ArbolUcTest {
 
     @Test
     void borrarArbolDelegadoEnService() {
+        // Verifica que borrarArbol delega correctamente en el servicio
         ArbolService service = mock(ArbolService.class);
         ArbolUc uc = new ArbolUc(service);
 

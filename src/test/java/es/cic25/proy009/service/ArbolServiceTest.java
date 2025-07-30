@@ -33,6 +33,8 @@ class ArbolServiceTest {
         Arbol resultado = service.crear(arbol);
         assertEquals("Manzano", resultado.getNombre());
         assertEquals(1, resultado.getRamas().size());
+        // Comprobación adicional
+        assertNotNull(resultado.getRamas().get(0).getArbol());
     }
 
     @Test

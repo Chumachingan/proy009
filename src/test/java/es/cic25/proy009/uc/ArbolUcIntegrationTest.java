@@ -1,5 +1,6 @@
 package es.cic25.proy009.uc;
 
+// Test de integración para la creación de un árbol con ramas usando MockMvc
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -28,6 +29,7 @@ public class ArbolUcIntegrationTest {
 
     @Test
     public void testCrearArbolConRamas() throws Exception {
+        // Crea un árbol con una rama y verifica que se crea correctamente
         Arbol arbol = new Arbol();
         arbol.setNombre("Álamo");
         arbol.setTipo("Deciduo");

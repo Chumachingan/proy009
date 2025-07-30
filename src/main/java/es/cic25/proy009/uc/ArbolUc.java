@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 
+// Componente de caso de uso para operaciones de Árbol
 @Component
 public class ArbolUc {
 
