@@ -1,5 +1,6 @@
 package es.cic25.proy009.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,6 +16,7 @@ public class Rama {
 
     @ManyToOne
     @JoinColumn(name = "arbol_id", nullable = false)
+    @JsonBackReference
     private Arbol arbol;
 
     // getters y setters
@@ -65,4 +67,36 @@ public class Rama {
     public void setArbol(Arbol arbol) {
         this.arbol = arbol;
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Rama other = (Rama) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Rama [id=" + id + ", nombre=" + nombre + ", longitud=" + longitud + ", color=" + color + ", principal="
+                + principal + ", arbol=" + arbol + "]";
+    }
+
 }

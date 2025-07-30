@@ -2,6 +2,7 @@ package es.cic25.proy009.controller;
 
 import es.cic25.proy009.model.Arbol;
 import es.cic25.proy009.repository.ArbolRepository;
+import es.cic25.proy009.service.ArbolService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,9 +13,11 @@ import java.util.Optional;
 public class ArbolController {
 
     private final ArbolRepository arbolRepository;
+    private final ArbolService arbolService;
 
-    public ArbolController(ArbolRepository arbolRepository) {
+    public ArbolController(ArbolRepository arbolRepository, ArbolService arbolService) {
         this.arbolRepository = arbolRepository;
+        this.arbolService = arbolService;
     }
 
     @GetMapping
@@ -34,6 +37,11 @@ public class ArbolController {
             arbol.getRamas().forEach(r -> r.setArbol(arbol));
         }
         return arbolRepository.save(arbol);
+    }
+
+    @PutMapping("/{id}")
+    public Arbol actualizarArbol(@PathVariable Long id, @RequestBody Arbol arbol) {
+        return arbolService.actualizar(id, arbol);
     }
 
     @DeleteMapping("/{id}")

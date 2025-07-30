@@ -37,7 +37,7 @@ class ArbolControllerIntegrationTest {
         rama.setLongitud(1.5);
         rama.setColor("Verde");
         rama.setPrincipal(true);
-        rama.setArbol(arbol);
+
         arbol.setRamas(List.of(rama));
 
         mockMvc.perform(post("/arboles")

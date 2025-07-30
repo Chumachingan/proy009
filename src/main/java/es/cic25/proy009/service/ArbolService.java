@@ -34,4 +34,23 @@ public class ArbolService {
     public void borrar(Long id) {
         arbolRepository.deleteById(id);
     }
+
+    public Arbol actualizar(Long id, Arbol arbolActualizado) {
+        return arbolRepository.findById(id).map(arbolExistente -> {
+            arbolExistente.setNombre(arbolActualizado.getNombre());
+            arbolExistente.setTipo(arbolActualizado.getTipo());
+            arbolExistente.setEdad(arbolActualizado.getEdad());
+            arbolExistente.setUbicacion(arbolActualizado.getUbicacion());
+            // Elimina todas las ramas actuales
+            arbolExistente.getRamas().clear();
+            // Añade las nuevas ramas
+            if (arbolActualizado.getRamas() != null) {
+                arbolActualizado.getRamas().forEach(rama -> {
+                    rama.setArbol(arbolExistente);
+                    arbolExistente.getRamas().add(rama);
+                });
+            }
+            return arbolRepository.save(arbolExistente);
+        }).orElseThrow(() -> new RuntimeException("Árbol no encontrado"));
+    }
 }

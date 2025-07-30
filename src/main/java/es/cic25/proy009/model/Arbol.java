@@ -1,6 +1,8 @@
 package es.cic25.proy009.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,8 +16,13 @@ public class Arbol {
     private int edad;
     private String ubicacion;
 
-    @OneToMany(mappedBy = "arbol", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Rama> ramas;
+    @OneToMany(
+        mappedBy = "arbol",
+        cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE},
+        orphanRemoval = true
+    )
+    @JsonManagedReference
+    private List<Rama> ramas = new ArrayList<>();
 
     public Arbol() {
     }
@@ -72,6 +79,38 @@ public class Arbol {
     }
 
     public void setRamas(List<Rama> ramas) {
-        this.ramas = ramas;
+        this.ramas = ramas != null ? ramas : new ArrayList<>();
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Arbol other = (Arbol) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Arbol [id=" + id + ", nombre=" + nombre + ", tipo=" + tipo + ", edad=" + edad + ", ubicacion="
+                + ubicacion + ", ramas=" + ramas + "]";
+    }
+
 }
